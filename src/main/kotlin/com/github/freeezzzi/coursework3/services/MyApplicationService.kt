@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.freeezzzi.coursework3.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.freeezzzi.coursework3.MyBundle
 
 class MyApplicationService {
 
