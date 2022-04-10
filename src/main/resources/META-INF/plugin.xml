@@ -7,6 +7,11 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <localInspection
+                language=""
+                groupName="BuildTimePlugin"
+                displayName="BuildTimeReducer"
+                implementationClass="com.github.freeezzzi.coursework3.javakotlinchecker.ModuleInspectionTool" />
         <annotator
                 language=""
                    implementationClass="com.github.freeezzzi.coursework3.actions.intentionactions.GradlePropertiesAnnotator" />
