@@ -1,0 +1,127 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.github.freeezzzi.coursework3</id>
+    <name>BuildTimeOptimizer</name>
+    <vendor>freeezzzi</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator
+                language=""
+                   implementationClass="com.github.freeezzzi.coursework3.actions.intentionactions.GradlePropertiesAnnotator" />
+
+        <fileType
+                name="gradle properties"
+                implementationClass="com.github.freeezzzi.coursework3.customlang.properties.GradlePropertiesFileType"
+                fieldName="INSTANCE"
+                language="properties"
+                extensions="properties"/>
+    </extensions>
+
+    <actions>
+        <group id="OptimizeBuildPlugin.TopMenu"
+               text="OptimizeBuildTimePlugin"
+               description="OptimizeBuildTimePlugin toolbar menu">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+        </group>
+
+        <group id="OptimizeBuildPlugin.TopMenu.ExpandableMenu"
+               popup="true"
+               text="Optimizations"
+               description="Separate actions">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu" anchor="after" relative-to-action="OptimizeAll"/>
+        </group>
+
+        <action id="OptimizeAll"
+                class="com.github.freeezzzi.coursework3.actions.OptimizeAll"
+                text="Optimize All"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu" anchor="first"/>
+            <override-text place="MainMenu" text="Optimize All"/>
+            <keyboard-shortcut first-keystroke="control alt A" second-keystroke="C" keymap="$default"/>
+            <mouse-shortcut keystroke="control button3 doubleClick" keymap="$default"/>
+        </action>
+
+        <action id="CheckIsGradleDaemonEnabled"
+                class="com.github.freeezzzi.coursework3.actions.CheckIsGradleDaemonEnabledAction"
+                text="Check Is Gradle Daemon Enabled"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="first"/>
+            <override-text place="MainMenu" text="Check Is Gradle Daemon Enabled"/>
+        </action>
+
+        <action id="DisableGradlePluginFeatures"
+                class="com.github.freeezzzi.coursework3.actions.DisableGradlePluginFeaturesAction"
+                text="Disable Gradle Plugin Features Action"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="CheckIsGradleDaemonEnabled"/>
+            <override-text place="MainMenu" text="Disable Gradle Plugin Features Action"/>
+        </action>
+
+        <action id="DisableJetifier"
+                class="com.github.freeezzzi.coursework3.actions.DisableJetifierAction"
+                text="Disable Jetifier"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="DisableGradlePluginFeatures"/>
+            <override-text place="MainMenu" text="Disable Jetifier"/>
+        </action>
+
+        <action id="DisableR8"
+                class="com.github.freeezzzi.coursework3.actions.DisableR8Action"
+                text="Disable R8"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="DisableJetifier"/>
+            <override-text place="MainMenu" text="Disable R8"/>
+        </action>
+
+        <action id="EnableCache"
+                class="com.github.freeezzzi.coursework3.actions.EnableCacheAction"
+                text="Enable Cache"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="DisableR8"/>
+            <override-text place="MainMenu" text="Enable Cache"/>
+        </action>
+
+        <action id="EnableCacheProblemsWarn"
+                class="com.github.freeezzzi.coursework3.actions.EnableCacheProblemsWarnsAction"
+                text="Enable Cache Problems Warn"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="EnableCache"/>
+            <override-text place="MainMenu" text="Enable Cache Problems Warn"/>
+        </action>
+
+        <action id="EnableNonTransitiveClasses"
+                class="com.github.freeezzzi.coursework3.actions.EnableNonTransitiveClassesAction"
+                text="Enable Non Transitive Classes"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="EnableCacheProblemsWarn"/>
+            <override-text place="MainMenu" text="Enable Non Transitive Classes"/>
+        </action>
+
+        <action id="EnableParallelBuild"
+                class="com.github.freeezzzi.coursework3.actions.EnableParallelBuildAction"
+                text="Enable Parallel Build"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="EnableNonTransitiveClasses"/>
+            <override-text place="MainMenu" text="Enable Parallel Build"/>
+        </action>
+
+        <action id="RemoveBuildConfig"
+                class="com.github.freeezzzi.coursework3.actions.RemoveBuildConfigAction"
+                text="Remove Build Config"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="EnableParallelBuild"/>
+            <override-text place="MainMenu" text="Remove Build Config"/>
+        </action>
+
+        <action id="DisablePngCrunching"
+                class="com.github.freeezzzi.coursework3.actions.DisablePngCrunching"
+                text="Disable PNG Crunching"
+                description="TODO">
+            <add-to-group group-id="OptimizeBuildPlugin.TopMenu.ExpandableMenu" anchor="after" relative-to-action="RemoveBuildConfig"/>
+            <override-text place="MainMenu" text="Disable PNG Crunching"/>
+        </action>
+
+    </actions>
+</idea-plugin>
