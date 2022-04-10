@@ -9,8 +9,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <localInspection
                 enabledByDefault="true"
-                groupName="BuildTimePlugin"
-                displayName="BuildTimeReducer"
+                groupName="OptimizeBuildTimePlugin"
+                displayName="Java and Kotlin code together inspection"
                 implementationClass="com.github.freeezzzi.coursework3.javakotlinchecker.ModuleInspectionTool" />
         <annotator
                 language=""

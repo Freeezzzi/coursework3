@@ -27,11 +27,11 @@ class BuildGradleSettings {
         val PNG_CRUNCHING_PATTERN = Pattern.compile(BUILD_GRADLE_PATTERN.replace(PLACEHOLDER, PNG_CRUNCHING))
 
         const val MINIFY = "minifyEnabled"
-        const val MINIFY_VALUE = "true"
+        const val MINIFY_VALUE = "false"
         val MINIFY_PATTERN = Pattern.compile(BUILD_GRADLE_PATTERN.replace(PLACEHOLDER, MINIFY))
 
         const val SHRINK = "shrinkResources"
-        const val SHRINK_VALUE = "true"
+        const val SHRINK_VALUE = "false"
         val SHRINK_PATTERN = Pattern.compile(BUILD_GRADLE_PATTERN.replace(PLACEHOLDER, SHRINK))
     }
 }
