@@ -1,21 +1,27 @@
 package com.github.freeezzzi.coursework3.javakotlinchecker
 
-import com.intellij.codeInspection.InspectionManager
-import com.intellij.codeInspection.LocalInspectionTool
-import com.intellij.codeInspection.ProblemDescriptor
-import com.intellij.codeInspection.ProblemsHolder
+import com.intellij.codeInspection.*
+import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiFile
 
 class ModuleInspectionTool: LocalInspectionTool() {
     override fun checkFile(file: PsiFile, manager: InspectionManager, isOnTheFly: Boolean): Array<ProblemDescriptor>? {
         val problemsHolder = ProblemsHolder(manager, file, isOnTheFly)
-        println("1")
         val wholeFile = file.originalFile
-        if (checkIsBuildGradleFile(wholeFile)) {
+        if (checkIsSourceCodeFile(wholeFile)) {
             var containJavaFiles = false
             var containKotlinFiles = false
-            file.containingDirectory.accept(object : PsiElementVisitor() {
+            wholeFile.containingDirectory.accept(object : PsiElementVisitor() {
+                override fun visitDirectory(dir: PsiDirectory) {
+                    super.visitDirectory(dir)
+                    dir.files.forEach {
+                        visitFile(it)
+                    }
+                    dir.subdirectories.forEach {
+                        visitDirectory(it)
+                    }
+                }
                 override fun visitFile(file: PsiFile) {
                     if (file.name.endsWith(".kt")) {
                         containKotlinFiles = true
@@ -31,7 +37,7 @@ class ModuleInspectionTool: LocalInspectionTool() {
         return problemsHolder.resultsArray
     }
 
-    private fun checkIsBuildGradleFile(file: PsiFile): Boolean {
-        return file.name == "build.gradle" || file.name == "build.gradle.kts"
+    private fun checkIsSourceCodeFile(file: PsiFile): Boolean {
+        return file.name.endsWith(".java") || file.name.endsWith(".kt")
     }
 }
